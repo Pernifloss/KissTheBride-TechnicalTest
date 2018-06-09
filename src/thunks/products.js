@@ -1,7 +1,7 @@
 import {
     fetchingProducts, fetchingProductsFailure, fetchingProductsSuccess
 } from "../actions/products";
-export function getProductThunk() {
+export function getProductsThunk() {
     return (dispatch, getStaten, apiClient) => new Promise((resolve, reject) => {
         dispatch(fetchingProducts());
         apiClient.getProducts().then((products)=>{
