@@ -35,4 +35,16 @@ export default class APIClient {
     }
 
 
+    getProducts() {
+        return new Promise((resolve, reject) => {
+
+            this.loadData(`${this.apiUri}/products`, {})
+                .then(products => {
+                    resolve(products)
+                })
+                .catch(error => {
+                    reject(error)
+                });
+        });
+    }
 }
