@@ -4,6 +4,10 @@ import '../../assets/grid.less'
 import ProductList from "../containers/ProductList";
 import ProductSearch from "../containers/ProductSearch";
 
+import {Switch, Route} from 'react-router';
+import {Link} from "react-router-dom";
+import CreateProduct from "../containers/CreateProduct";
+
 class Main extends React.Component {
 
     componentDidMount() {
@@ -26,11 +30,15 @@ class Main extends React.Component {
                 <div className="row">
 
                     <div className="col-3">
-                        Menu
+                        <Link  to="list">List</Link>
+                        <Link  to="create">Create Product</Link>
                     </div>
 
                     <div className="col-9">
-                        <ProductList/>
+                        <Switch>
+                            <Route exact path={"/list"} component={ProductList}/>
+                            <Route exact path={"/create"} component={CreateProduct}/>
+                        </Switch>
                     </div>
 
                 </div>
