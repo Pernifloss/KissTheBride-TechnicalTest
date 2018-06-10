@@ -1,44 +1,47 @@
 import React from 'react';
-import { Table , Avatar } from 'antd';
-import {Switch, Route} from 'react-router';
-import {Link} from "react-router-dom";
+import {Card, Avatar, Spin} from 'antd';
+import ProductPagination  from '../containers/ProductPagination'
 import PropTypes from 'prop-types';
 
 class ProductList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.columns = [{
-            title : 'Product Name',
-            key : 'name',
-            dataIndex: 'name',
-        },{
-            title : 'Description',
-            key : 'description',
-            dataIndex: 'description',
-        },{
-            title : 'Image',
-            key : 'image',
-            render:(record)=>   <Avatar shape="square" size="big" src={record.image}  />
-        }]
     }
-    componentDidMount(){
-        this.props.initialActions()
-    }
-    render() {
 
+    render() {
+        const {products} = this.props;
         return (
-          <Table
-            dataSource={this.props.products}
-            columns={this.columns}
-          />
+            <div>
+
+                {products ? products.map((product) =>
+                    <div className="row" key={product.id}>
+                        <Card title={product.name}>
+                            <div className="col-10">{product.description}
+                                <div className="row">
+                                    {product.brand ? product.brand.name : ''}
+                                </div>
+                                <div className="row">
+
+                                    {product.categories.map((category, num) =>
+                                        <span key={category.id}>{num !== 0 ? '/' : ''} {category.name} </span>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="col-2"><Avatar shape="square" size="big" src={product.image}/></div>
+                        </Card>
+                    </div>
+                ) : <Spin/>}
+
+                <ProductPagination/>
+            </div>
         );
     }
 }
 
 ProductList.propTypes = {
-    initialActions : PropTypes.func
-
+    initialActions: PropTypes.func,
+    products: PropTypes.array
 };
 
 export default ProductList;

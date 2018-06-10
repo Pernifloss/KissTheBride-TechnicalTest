@@ -1,4 +1,3 @@
-import {Map, List} from "immutable";
 import productsReducer, {initialState} from '../../src/reducers/products';
 import {fetchingProducts, fetchingProductsFailure, fetchingProductsSuccess} from "../../src/actions/products";
 import productsFixtures from '../fixtures/products.json';
@@ -21,15 +20,15 @@ describe('products reducers', () => {
 
             state = productsReducer(undefined, {});
 
-            result = productsReducer(state, fetchingProductsSuccess(productsFixtures));
+            result = productsReducer(state, fetchingProductsSuccess(productsFixtures,0));
 
         });
 
         it('should add products into state', () => {
 
-            expect(result.get('products').size).toEqual(33);
-            expect(result.get('products').get(0).get('name')).toEqual('0001');
-            expect(result.get('products').get(0).get('description')).toEqual('un petit test');
+            expect(result.getIn(['products',0]).size).toEqual(33);
+            expect(result.getIn(['products',0]).get(0).get('name')).toEqual('0001');
+            expect(result.getIn(['products',0]).get(0).get('description')).toEqual('un petit test');
             expect(result.get('fetchingError')).toEqual(false);
             expect(result.get('fetchingProducts')).toEqual(false);
         });

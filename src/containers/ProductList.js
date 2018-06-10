@@ -1,14 +1,9 @@
 import {connect} from "react-redux";
 import {withRouter} from 'react-router';
 import ProductList from "../components/ProductList";
-import {push} from "react-router-redux"
-import {getProductsThunk} from "../thunks/products";
+import {selectProductForCurrentPage} from "../selectors/products";
 
 export default withRouter(connect((state, props) => ({
-    products : state.getIn(['products','products']).toJS()
+    products : selectProductForCurrentPage(state)
 }),(dispatch, props) => ({
-    initialActions(){
-        dispatch(getProductsThunk())
-
-    }
 }))(ProductList));
