@@ -11,8 +11,7 @@ export const initialState = () => {
 export default (state = initialState(), action) => {
     switch (action.type) {
         case CREATING_PRODUCTS:
-            return state.set('fetchingError', true)
-                .set('creatingProductError', false);
+            return state.set('creatingProduct', true);
         case CREATING_PRODUCTS_SUCCESS:
             return state.set('creatingProduct', false);
         case CREATING_PRODUCTS_FAILURE:

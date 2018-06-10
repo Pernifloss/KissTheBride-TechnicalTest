@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Card, Select, Input, Spin, Button} from 'antd';
+import {Form, Card, Select, Input, Spin, Button, Avatar} from 'antd';
 
 class CreateProduct extends React.Component {
 
@@ -15,7 +15,8 @@ class CreateProduct extends React.Component {
                 categories: [],
                 brand: null,
                 submitted: false,
-                loading: false
+                loading: false,
+                url: '',
             })
         }
     }
@@ -28,7 +29,8 @@ class CreateProduct extends React.Component {
             categories: [],
             brand: null,
             submitted: false,
-            loading: false
+            loading: false,
+            url: ''
 
         };
     }
@@ -47,7 +49,8 @@ class CreateProduct extends React.Component {
                                 name: this.state.name,
                                 description: this.state.description,
                                 categories: this.state.categories,
-                                brand : this.state.brand
+                                brand: this.state.brand,
+                                url : this.state.url
                             })
                         }
                     }}
@@ -64,7 +67,11 @@ class CreateProduct extends React.Component {
                             value={this.state.name}
                         />
                     </Form.Item>
-                    <Form.Item>
+                    <Form.Item
+
+                        help={this.state.submitted && this.state.description === '' ? 'Description is mandatory' : ''}
+                        validateStatus={this.state.submitted && this.state.description === '' ? 'error' : ''}
+                    >
                         <Input
                             placeholder="Product description"
                             onChange={({target: {value}}) => {
@@ -102,6 +109,16 @@ class CreateProduct extends React.Component {
                                     key={category.get('id')}>{category.get('name')}</Select.Option>)}
                             </Select>
                         </Spin>
+                    </Form.Item>
+                    <Form.Item>
+                        <Input
+                            placeholder="Product image url"
+                            onChange={({target: {value}}) => {
+                                this.setState({url: value})
+                            }}
+                            value={this.state.url}
+                        />
+                        <Avatar src={this.state.url}/>
                     </Form.Item>
                     <Form.Item>
                         <Button

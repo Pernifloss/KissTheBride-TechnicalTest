@@ -2,6 +2,7 @@ import {Map, List} from "immutable";
 
 import {getProductsMetadata, getProductsThunk} from "../../src/thunks/products"
 import productsFixtures from '../fixtures/products.json'
+
 describe('Products thunks ', () => {
     let state;
 
@@ -65,6 +66,7 @@ describe('Products thunks ', () => {
             });
 
         });
+
         test('getProductsThunk', () => {
 
             const dispatchSpy = jest.fn();

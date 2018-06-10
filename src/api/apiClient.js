@@ -17,15 +17,42 @@ export default class APIClient {
                     const contentType = response.headers.get("content-type");
                     if (response.ok) {
                         if (contentType && contentType.indexOf("application/json") !== -1) {
-                            return response.json().then((data) => {resolve(data)});
+                            return response.json().then((data) => {
+                                resolve(data)
+                            });
                         } else {
-                            return response.text().then((data) => {resolve(data)});
+                            return response.text().then((data) => {
+                                resolve(data)
+                            });
                         }
                     } else {
                         reject(new Error("Bad response from server", response.status));
                     }
                 })
                 .catch((error) => {
+                    reject(error);
+                });
+        });
+    }
+
+    saveData(url, body,) {
+        return new Promise((resolve, reject) => {
+            const form = new FormData();
+            Object.keys(body).forEach(k=>{
+                form.append(k, body[k]);
+            });
+
+
+            fetch(url, {method: 'POST' , body:form})
+                .then((response) => {
+                    if (response.ok) {
+                        resolve()
+                    } else {
+                        reject(new Error("Bad response from server", response.status));
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
                     reject(error);
                 });
         });
@@ -99,6 +126,19 @@ export default class APIClient {
                     })
                 .catch(error => {
                     reject(error)
+                });
+        });
+    }
+
+    createProduct(product) {
+        return new Promise((resolve, reject) => {
+            this.saveData(`${this.apiUri}/products`, product)
+                .then(
+                    () => {
+                        resolve();
+                    })
+                .catch(error => {
+                    reject(error);
                 });
         });
     }

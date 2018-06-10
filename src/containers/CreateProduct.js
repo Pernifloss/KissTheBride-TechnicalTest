@@ -2,6 +2,7 @@ import {connect} from "react-redux";
 import CreateProduct from "../components/CreateProduct";
 import {getCategoriesThunk} from "../thunks/categories";
 import {getBrandsThunk} from "../thunks/brands";
+import {createProductThunk} from "../thunks/createProduct";
 
 export default connect((state, props) => ({
     categories: state.getIn(['categories','categories']),

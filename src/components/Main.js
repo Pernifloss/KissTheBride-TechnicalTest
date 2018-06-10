@@ -19,7 +19,6 @@ class Main extends React.Component {
         return (
             <Spin spinning={this.props.loading}>
                 <div className="header">
-
                     <div className="row">
                         <div className="col-3">
                             <ProductSearch />
@@ -28,10 +27,13 @@ class Main extends React.Component {
                 </div>
 
                 <div className="row">
-
                     <div className="col-3">
-                        <Link  to="list">List</Link>
-                        <Link  to="create">Create Product</Link>
+                        <div className="row">
+                            <Link to="list">List</Link>
+                        </div>
+                        <div className="row">
+                            <Link to="create">Create Product</Link>
+                        </div>
                     </div>
 
                     <div className="col-9">
