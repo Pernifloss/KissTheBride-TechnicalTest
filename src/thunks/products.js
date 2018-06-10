@@ -12,7 +12,8 @@ export function getProductsThunk() {
         const state = getState();
         const pageNumber = state.getIn(['pagination', 'currentPage']);
         const pageSize = state.getIn(['pagination', 'pageSize']);
-        apiClient.getProducts({start: pageNumber * pageSize, limit: pageSize}).then(({products}) => {
+        const search = state.getIn(['search', 'query']);
+        apiClient.getProducts({start: pageNumber * pageSize, limit: pageSize,search}).then(({products}) => {
             dispatch(fetchingProductsSuccess(products, pageNumber));
             resolve();
         }).catch((error) => {
@@ -22,10 +23,10 @@ export function getProductsThunk() {
     });
 }
 
-export function getProductsMetadata() {
+export function getProductsMetadata(search) {
     return (dispatch, getState, apiClient) => new Promise((resolve, reject) => {
         dispatch(fetchingProductCount());
-        apiClient.getProducts({start: 0, limit: 0}).then(({count}) => {
+        apiClient.getProducts({start: 0, limit: 0, search}).then(({count}) => {
             dispatch(fetchingProductCountSuccess(Number(count)));
             resolve();
         }).catch((error) => {

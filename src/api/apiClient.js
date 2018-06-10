@@ -59,10 +59,14 @@ export default class APIClient {
         });
     }
 
-    getProducts({start, limit}) {
+    getProducts({start, limit, search}) {
         // consider using https://github.com/sindresorhus/query-string
         return new Promise((resolve, reject) => {
-            this.loadProductData(`${this.apiUri}/products${start !== undefined || limit !== undefined ? '?' : ''}${start !== undefined ? `&start=${start}` : ''}${limit !== undefined ? `&limit=${limit}` : ''}`, {})
+            let paramPrefix = start !== undefined || limit !== undefined ? '?' : '';
+            let maybeStartParam = start !== undefined ? `&start=${start}` : '';
+            let maybeLimitParam = limit !== undefined ? `&limit=${limit}` : '';
+            let maybeSearchParam = search !== undefined ? `&search=${search}` : '';
+            this.loadProductData(`${this.apiUri}/products${paramPrefix}${maybeStartParam}${maybeLimitParam}${maybeSearchParam}`, {})
                 .then(
                     ({data: products, count, start, limit}) => {
                         resolve({products,count, start, limit})
