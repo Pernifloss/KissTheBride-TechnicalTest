@@ -19,16 +19,16 @@ class ProductList extends React.Component {
                         <Card title={product.name}>
                             <div className="col-10">{product.description}
                                 <div className="row">
-                                    {product.brand ? product.brand.name : ''}
+                                    Brand :    {product.brand ? product.brand.name : ''}
                                 </div>
                                 <div className="row">
-
-                                    {product.categories.map((category, num) =>
+                                    {product.categories.length>0?'Categories : ':''} {product.categories.map((category, num) =>
                                         <span key={category.id}>{num !== 0 ? '/' : ''} {category.name} </span>
                                     )}
                                 </div>
                             </div>
-                            <div className="col-2"><Avatar shape="square" size="big" src={product.image}/></div>
+                            <div className="col-2"><Avatar shape="square" style={{width: '120px', height: '120px'}}
+                                                           src={product.image}/></div>
                         </Card>
                     </div>
                 ) : <Spin/>}

@@ -29,7 +29,7 @@ class Main extends React.Component {
                 <div className="row">
                     <div className="col-3">
                         <div className="row">
-                            <Link to="list">List</Link>
+                            <Link to="list">Product List</Link>
                         </div>
                         <div className="row">
                             <Link to="create">Create Product</Link>
