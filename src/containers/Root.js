@@ -7,7 +7,7 @@ export default withRouter(connect((state, props) => ({
     loading: state.getIn(['products','fetchingProducts'])
 }),(dispatch, props) => ({
     initialActions(){
-        dispatch(getProductsMetadata()).then(()=>{
+        dispatch(getProductsMetadata('')).then(()=>{
             //retrieve first page of products
             dispatch(getProductsThunk())
         })

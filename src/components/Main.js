@@ -1,7 +1,8 @@
 import React from 'react';
-import { Spin } from 'antd';
+import {Spin} from 'antd';
 import '../../assets/grid.less'
 import ProductList from "../containers/ProductList";
+import ProductSearch from "../containers/ProductSearch";
 
 class Main extends React.Component {
 
@@ -12,23 +13,28 @@ class Main extends React.Component {
     render() {
 
         return (
-                <Spin spinning={this.props.loading}>
-                    <div className="header">
-                        Product List
-                    </div>
+            <Spin spinning={this.props.loading}>
+                <div className="header">
 
                     <div className="row">
-
                         <div className="col-3">
-                            Menu
+                            <ProductSearch />
                         </div>
-
-                        <div className="col-9">
-                            <ProductList/>
-                        </div>
-
                     </div>
-                </Spin>
+                </div>
+
+                <div className="row">
+
+                    <div className="col-3">
+                        Menu
+                    </div>
+
+                    <div className="col-9">
+                        <ProductList/>
+                    </div>
+
+                </div>
+            </Spin>
         );
     }
 }
