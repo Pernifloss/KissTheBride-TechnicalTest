@@ -1,35 +1,34 @@
 import React from 'react';
-import { Button ,Spin} from 'antd';
-import {Switch, Route} from 'react-router';
-import {Link} from "react-router-dom";
+import { Spin } from 'antd';
 import '../../assets/grid.less'
+import ProductList from "../containers/ProductList";
 
 class Main extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
+
+    componentDidMount() {
+        this.props.initialActions()
     }
-componentDidMount(){
-    this.props.initialActions()
-}
+
     render() {
 
         return (
-            <div>
+                <Spin spinning={this.props.loading}>
+                    <div className="header">
+                        Product List
+                    </div>
 
-                <Spin >
-                <div className="header">
-                    <Button size="large" >Header Button</Button>
+                    <div className="row">
 
-                </div>
+                        <div className="col-3">
+                            Menu
+                        </div>
 
-                <div className="row">
+                        <div className="col-9">
+                            <ProductList/>
+                        </div>
 
-
-
-                </div>
+                    </div>
                 </Spin>
-            </div>
         );
     }
 }
